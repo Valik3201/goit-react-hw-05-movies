@@ -1,13 +1,16 @@
 import { axios, baseOptions } from './api';
 
-const searchMovies = async query => {
+const searchMovies = async queryParams => {
   const options = {
     ...baseOptions,
     params: {
-      include_adult: false,
-      language: 'en-US',
-      page: 1,
-      query: query,
+      query: queryParams.query,
+      include_adult: queryParams.include_adult || false,
+      language: queryParams.language || 'en-US',
+      primary_release_year: queryParams.primary_release_year || '',
+      page: queryParams.page || 1,
+      region: queryParams.region || '',
+      year: queryParams.year || '',
     },
   };
 
