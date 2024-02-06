@@ -1,29 +1,26 @@
-import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 import { fetchTrendingData } from 'services/fetchTrendingData';
 
 const Home = () => {
-  const [movies, setMovies] = useState([]);
+  const { isPending, isError, data, error } = useQuery({
+    queryKey: ['tranding'],
+    queryFn: fetchTrendingData,
+  });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const trendingData = await fetchTrendingData();
-        console.debug(trendingData);
-        setMovies(trendingData);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  if (isPending) {
+    return <div>Loading...</div>;
+  }
 
-    fetchData();
-  }, []);
+  if (isError) {
+    return <div>Error fetching data: {error.message}</div>;
+  }
 
   return (
     <div>
       <h1>Trending Movies and TV Shows</h1>
       <div>
-        {movies.map(movie => (
+        {data.map(movie => (
           <Link to={`/movies/${movie.id}`} key={movie.id}>
             <img
               src={`https://image.tmdb.org/t/p/w342${movie.poster_path}`}

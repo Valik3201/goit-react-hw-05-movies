@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 
 import { fetchReviews } from 'services/fetchReviews';
 
@@ -9,29 +9,24 @@ import parse from 'html-react-parser';
 
 const Reviews = () => {
   const { movieId } = useParams();
-  const [movieReviews, setMovieReviews] = useState(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const movieReviews = await fetchReviews(movieId);
-        setMovieReviews(movieReviews);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['reviews', movieId],
+    queryFn: () => fetchReviews(movieId),
+  });
 
-    fetchData();
-  }, [movieId]);
-
-  if (!movieReviews) {
+  if (isLoading) {
     return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error fetching data: {error.message}</div>;
   }
 
   return (
     <div>
       <h1>Reviews</h1>
-      {movieReviews.map(review => (
+      {data.map(review => (
         <ul key={review.id}>
           <li>
             <h4>{review.author}</h4>

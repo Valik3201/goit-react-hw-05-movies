@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://valik3201.github.io/goit-react-hw-05-movies/",
   "dependencies": {
+    "@tanstack/react-query": "^5.18.1",
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",

@@ -1,50 +1,40 @@
-import { useState, useRef, useEffect } from 'react';
+import { useRef } from 'react';
+import { Link } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 import { searchMovies } from 'services/searchMovies';
-import { useSearchParams, Link } from 'react-router-dom';
 
 const Movies = () => {
   const searchInputRef = useRef(null);
   const yearInputRef = useRef(null);
-  const [searchResults, setSearchResults] = useState([]);
-  const [searchParams, setSearchParams] = useSearchParams();
 
-  const handleSearch = async ({ query, year }) => {
-    try {
-      const searchData = await searchMovies({
-        query: query,
+  const searchQuery = searchInputRef.current?.value.trim();
+  const releaseYear = yearInputRef.current?.value.trim();
+
+  const { data, isLoading, isError, error } = useQuery({
+    queryKey: ['searchMovies', searchQuery, releaseYear],
+    queryFn: async () => {
+      return await searchMovies({
+        query: searchQuery,
         include_adult: false,
         language: 'en-US',
-        primary_release_year: year,
+        primary_release_year: releaseYear,
         page: 1,
         region: '',
         year: '',
       });
-      setSearchResults(searchData.results);
-      setSearchParams({ query, ...(year && { year: year }) });
-    } catch (error) {
-      console.error(error);
-    }
-  };
+    },
+    enabled: false,
+  });
 
-  useEffect(() => {
-    const q = searchParams.get('query') || '';
-    const year = searchParams.get('year') || '';
-    searchInputRef.current.value = q;
-    yearInputRef.current.value = year;
-  }, [searchParams]);
+  const handleSearch = async e => {
+    e.preventDefault();
+    data.refetch();
+  };
 
   return (
     <div>
       <h1>Search Movies</h1>
-      <form
-        onSubmit={e => {
-          e.preventDefault();
-          handleSearch({
-            query: searchInputRef.current.value.trim(),
-            year: yearInputRef.current.value.trim(),
-          });
-        }}
-      >
+      <form onSubmit={handleSearch}>
         <input
           type="text"
           ref={searchInputRef}
@@ -57,8 +47,10 @@ const Movies = () => {
         />
         <button type="submit">Search</button>
       </form>
+      {isLoading && <div>Loading...</div>}
+      {isError && <div>Error fetching data: {error.message}</div>}
       <div>
-        {searchResults.map(movie => (
+        {data.map(movie => (
           <Link to={`/movies/${movie.id}`} key={movie.id}>
             <img
               src={`https://image.tmdb.org/t/p/w342${movie.poster_path}`}

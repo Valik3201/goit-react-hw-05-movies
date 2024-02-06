@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 import { Suspense } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 
@@ -7,23 +7,18 @@ import { fetchMovieDetails } from 'services/fetchMovieDetails';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
-  const [movieDetails, setMovieDetails] = useState(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const movieDetails = await fetchMovieDetails(movieId);
-        setMovieDetails(movieDetails);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  const { isPending, isError, data, error } = useQuery({
+    queryKey: ['movieDetails', movieId],
+    queryFn: () => fetchMovieDetails(movieId),
+  });
 
-    fetchData();
-  }, [movieId]);
-
-  if (!movieDetails) {
+  if (isPending) {
     return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error fetching data: {error.message}</div>;
   }
 
   return (
@@ -31,24 +26,25 @@ const MovieDetails = () => {
       <h1>Movie Details</h1>
       <div>
         <img
-          src={`https://image.tmdb.org/t/p/w342${movieDetails.poster_path}`}
-          alt={movieDetails.original_title}
+          src={`https://image.tmdb.org/t/p/w342${data.poster_path}`}
+          alt={data.original_title}
         />
-        <h1>{movieDetails.original_title}</h1>
-        <p>{movieDetails.overview}</p>
+        <h1>{data.original_title}</h1>
         <h5>
-          <i>{movieDetails.tagline}</i>
+          <i>{data.tagline}</i>
         </h5>
 
+        <p>{data.overview}</p>
+
         <h4>Genres</h4>
-        {movieDetails.genres.map(genre => (
+        {data.genres.map(genre => (
           <ul key={genre.id}>
             <li>{genre.name}</li>
           </ul>
         ))}
 
         <h4>Production Companies</h4>
-        {movieDetails.production_countries.map(country => (
+        {data.production_countries.map(country => (
           <ul key={country.iso_3166_1}>
             <li>{country.name}</li>
           </ul>

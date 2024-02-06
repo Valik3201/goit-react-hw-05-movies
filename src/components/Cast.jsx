@@ -1,33 +1,28 @@
-import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 
 import { fetchCast } from 'services/fetchCast';
 
 const Cast = () => {
   const { movieId } = useParams();
-  const [movieCast, setMovieCast] = useState(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const movieCast = await fetchCast(movieId);
-        setMovieCast(movieCast);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['cast', movieId],
+    queryFn: () => fetchCast(movieId),
+  });
 
-    fetchData();
-  }, [movieId]);
-
-  if (!movieCast) {
+  if (isLoading) {
     return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error fetching data: {error.message}</div>;
   }
 
   return (
     <div>
       <h1>Cast</h1>
-      {movieCast.map(actor => (
+      {data.map(actor => (
         <ul key={actor.id}>
           <li>
             <img

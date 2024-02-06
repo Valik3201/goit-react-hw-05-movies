@@ -14,13 +14,9 @@ const searchMovies = async queryParams => {
     },
   };
 
-  try {
-    const response = await axios.get('/search/movie', options);
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
+  const { data } = await axios.get('/search/movie', options);
+
+  return data;
 };
 
 export { searchMovies };
