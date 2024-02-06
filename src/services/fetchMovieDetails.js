@@ -6,7 +6,6 @@ const fetchMovieDetails = async movie_id => {
       `/movie/${movie_id}?language=en-US`,
       baseOptions
     );
-    console.debug(response.data);
     return response.data;
   } catch (error) {
     console.error(error);

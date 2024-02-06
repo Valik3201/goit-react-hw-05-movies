@@ -28,7 +28,7 @@ const MovieDetails = () => {
 
   return (
     <div>
-      <h1>MovieDetails</h1>
+      <h1>Movie Details</h1>
       <div>
         <img
           src={`https://image.tmdb.org/t/p/w342${movieDetails.poster_path}`}
