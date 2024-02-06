@@ -1,35 +1,55 @@
-import { useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { useRef, useEffect } from 'react';
+import { useSearchParams, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { searchMovies } from 'services/searchMovies';
 
 const Movies = () => {
   const searchInputRef = useRef(null);
   const yearInputRef = useRef(null);
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const searchQuery = searchInputRef.current?.value.trim();
-  const releaseYear = yearInputRef.current?.value.trim();
-
-  const { data, isLoading, isError, error } = useQuery({
-    queryKey: ['searchMovies', searchQuery, releaseYear],
+  const { data, isLoading, isError, error, refetch } = useQuery({
+    queryKey: ['searchMovies'],
     queryFn: async () => {
       return await searchMovies({
-        query: searchQuery,
+        query: searchInputRef.current?.value.trim(),
         include_adult: false,
         language: 'en-US',
-        primary_release_year: releaseYear,
+        primary_release_year: yearInputRef.current?.value.trim(),
         page: 1,
         region: '',
         year: '',
       });
     },
-    enabled: false,
   });
 
   const handleSearch = async e => {
     e.preventDefault();
-    data.refetch();
+    const searchQuery = searchInputRef.current.value.trim();
+    const releaseYear = yearInputRef.current.value.trim();
+
+    setSearchParams({
+      query: searchQuery,
+      ...(releaseYear && { year: releaseYear }),
+    });
+
+    refetch({
+      query: searchQuery,
+      include_adult: false,
+      language: 'en-US',
+      primary_release_year: releaseYear,
+      page: 1,
+      region: '',
+      year: '',
+    });
   };
+
+  useEffect(() => {
+    const q = searchParams.get('query') || '';
+    const year = searchParams.get('year') || '';
+    searchInputRef.current.value = q;
+    yearInputRef.current.value = year;
+  }, [searchParams]);
 
   return (
     <div>
@@ -50,7 +70,7 @@ const Movies = () => {
       {isLoading && <div>Loading...</div>}
       {isError && <div>Error fetching data: {error.message}</div>}
       <div>
-        {data.map(movie => (
+        {data?.map(movie => (
           <Link to={`/movies/${movie.id}`} key={movie.id}>
             <img
               src={`https://image.tmdb.org/t/p/w342${movie.poster_path}`}

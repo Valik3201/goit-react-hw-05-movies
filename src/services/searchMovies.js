@@ -15,8 +15,7 @@ const searchMovies = async queryParams => {
   };
 
   const { data } = await axios.get('/search/movie', options);
-
-  return data;
+  return data.results;
 };
 
 export { searchMovies };
