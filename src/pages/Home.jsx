@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { fetchTrendingData } from 'services/api';
+import { fetchTrendingData } from 'services/fetchTrendingData';
 
 const Home = () => {
   const [movies, setMovies] = useState([]);

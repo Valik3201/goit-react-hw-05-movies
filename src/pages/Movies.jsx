@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { searchMovies } from '../services/searchMovies';
+import { searchMovies } from 'services/searchMovies';
 
 const Movies = () => {
   const searchInputRef = useRef(null);
