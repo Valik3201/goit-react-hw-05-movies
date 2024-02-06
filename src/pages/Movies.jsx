@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { searchMovies } from 'services/searchMovies';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, Link } from 'react-router-dom';
 
 const Movies = () => {
   const searchInputRef = useRef(null);
@@ -59,14 +59,18 @@ const Movies = () => {
       </form>
       <div>
         {searchResults.map(movie => (
-          <div key={movie.id}>
+          <Link to={`/movies/${movie.id}`} key={movie.id}>
             <img
               src={`https://image.tmdb.org/t/p/w342${movie.poster_path}`}
-              alt={movie.title}
+              alt={movie.title || movie.name}
             />
-            <p>Title: {movie.title}</p>
-            <p>Release Date: {movie.release_date}</p>
-          </div>
+            <h3>{movie.title || movie.name}</h3>
+            <h4>
+              {movie.release_date
+                ? new Date(movie.release_date).getFullYear()
+                : new Date(movie.first_air_date).getFullYear()}
+            </h4>
+          </Link>
         ))}
       </div>
     </div>

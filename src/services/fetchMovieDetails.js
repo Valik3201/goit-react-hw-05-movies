@@ -1,16 +1,17 @@
 import { axios, baseOptions } from './api';
 
-const fetchTrendingData = async () => {
+const fetchMovieDetails = async movie_id => {
   try {
     const response = await axios.get(
-      '/trending/movie/day?language=en-US',
+      `/movie/${movie_id}?language=en-US`,
       baseOptions
     );
-    return response.data.results;
+    console.debug(response.data);
+    return response.data;
   } catch (error) {
     console.error(error);
     throw error;
   }
 };
 
-export { fetchTrendingData };
+export { fetchMovieDetails };
