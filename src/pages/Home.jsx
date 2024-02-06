@@ -8,6 +8,7 @@ export const Home = () => {
     const fetchData = async () => {
       try {
         const trendingData = await fetchTrendingData();
+        console.debug(trendingData);
         setMovies(trendingData);
       } catch (error) {
         console.error(error);
@@ -24,7 +25,7 @@ export const Home = () => {
         {movies.map(movie => (
           <div key={movie.id}>
             <img
-              src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}
+              src={`https://image.tmdb.org/t/p/w342${movie.poster_path}`}
               alt={movie.title || movie.name}
             />
             <p>
