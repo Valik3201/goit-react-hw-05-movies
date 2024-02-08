@@ -53,7 +53,9 @@ const Movies = () => {
 
   return (
     <div>
-      <h1>Search Movies</h1>
+      <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+        Search Movies
+      </h1>
       <form onSubmit={handleSearch}>
         <input
           type="text"

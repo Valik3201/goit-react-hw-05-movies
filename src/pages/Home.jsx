@@ -18,7 +18,9 @@ const Home = () => {
 
   return (
     <div>
-      <h1>Trending Movies and TV Shows</h1>
+      <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+        Trending Movies and TV Shows
+      </h1>
       <div>
         {data.map(movie => (
           <Link to={`/movies/${movie.id}`} key={movie.id}>

@@ -2,7 +2,10 @@ import { lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { SharedLayout } from './SharedLayout';
+
+// Geist Sans Font
 import 'non.geist';
+// Geist Mono Font
 import 'non.geist/mono';
 
 // Create a client
