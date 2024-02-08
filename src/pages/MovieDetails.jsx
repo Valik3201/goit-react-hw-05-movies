@@ -23,39 +23,58 @@ const MovieDetails = () => {
 
   return (
     <div>
-      <h1>Movie Details</h1>
       <div>
         <img
           src={`https://image.tmdb.org/t/p/w342${data.poster_path}`}
           alt={data.original_title}
         />
-        <h1>{data.original_title}</h1>
-        <h5>
-          <i>{data.tagline}</i>
-        </h5>
+        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+          {data.original_title}
+        </h2>
 
-        <p>{data.overview}</p>
+        <blockquote className="mt-6 border-l-2 pl-6 italic">
+          {data.tagline}
+        </blockquote>
 
-        <h4>Genres</h4>
+        <p className="leading-7 [&:not(:first-child)]:mt-6">{data.overview}</p>
+
+        <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
+          Genres
+        </h4>
         {data.genres.map(genre => (
-          <ul key={genre.id}>
+          <ul key={genre.id} className="my-6 ml-6 list-disc [&>li]:mt-2">
             <li>{genre.name}</li>
           </ul>
         ))}
 
-        <h4>Production Companies</h4>
+        <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
+          Production Companies
+        </h4>
         {data.production_countries.map(country => (
-          <ul key={country.iso_3166_1}>
+          <ul
+            key={country.iso_3166_1}
+            className="my-6 ml-6 list-disc [&>li]:mt-2"
+          >
             <li>{country.name}</li>
           </ul>
         ))}
       </div>
       <ul>
         <li>
-          <Link to="cast">Cast</Link>
+          <Link
+            to="cast"
+            className="scroll-m-20 text-2xl font-semibold tracking-tight"
+          >
+            Cast
+          </Link>
         </li>
         <li>
-          <Link to="reviews">Reviews</Link>
+          <Link
+            to="reviews"
+            className="scroll-m-20 text-2xl font-semibold tracking-tight"
+          >
+            Reviews
+          </Link>
         </li>
       </ul>
       <Suspense fallback={<div>Loading subpage...</div>}>
