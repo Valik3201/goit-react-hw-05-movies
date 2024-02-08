@@ -11,7 +11,7 @@ import { buttonVariants } from '@/components/ui/button';
 
 export const SharedLayout = () => {
   return (
-    <div className="md:container md:mx-auto pb-8">
+    <div className="container md:mx-auto pb-8">
       <header className="py-8">
         <nav>
           <NavigationMenu>

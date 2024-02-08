@@ -3,6 +3,10 @@ import { useSearchParams, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { searchMovies } from 'services/searchMovies';
 
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+
 const Movies = () => {
   const searchInputRef = useRef(null);
   const yearInputRef = useRef(null);
@@ -57,33 +61,42 @@ const Movies = () => {
         Search Movies
       </h1>
       <form onSubmit={handleSearch}>
-        <input
-          type="text"
-          ref={searchInputRef}
-          placeholder="Enter movie title..."
-        />
-        <input
-          type="text"
-          ref={yearInputRef}
-          placeholder="Enter release year..."
-        />
-        <button type="submit">Search</button>
+        <div className="flex w-full max-w-2xl items-center space-x-2 pb-8">
+          <Input
+            type="text"
+            ref={searchInputRef}
+            placeholder="Enter movie title..."
+          />
+          <Input
+            type="text"
+            ref={yearInputRef}
+            placeholder="Enter release year..."
+          />
+          <Button type="submit">Search</Button>
+        </div>
       </form>
       {isLoading && <div>Loading...</div>}
       {isError && <div>Error fetching data: {error.message}</div>}
-      <div>
+      <div className='className="grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4'>
         {data?.map(movie => (
           <Link to={`/movies/${movie.id}`} key={movie.id}>
-            <img
-              src={`https://image.tmdb.org/t/p/w342${movie.poster_path}`}
-              alt={movie.title || movie.name}
-            />
-            <h3>{movie.title || movie.name}</h3>
-            <h4>
-              {movie.release_date
-                ? new Date(movie.release_date).getFullYear()
-                : new Date(movie.first_air_date).getFullYear()}
-            </h4>
+            <div className="flex flex-col gap-2">
+              <div className="overflow-hidden rounded-lg">
+                <img
+                  src={`https://image.tmdb.org/t/p/w342${movie.poster_path}`}
+                  alt={movie.title || movie.name}
+                  className="h-auto w-auto object-cover transition-all hover:scale-105"
+                />
+              </div>
+              <h3 className="scroll-m-20 text-md font-bold tracking-tight">
+                {movie.title || movie.name}
+              </h3>
+              <h4 lassName="text-md text-muted-foreground font-semibold">
+                {movie.release_date
+                  ? new Date(movie.release_date).getFullYear()
+                  : new Date(movie.first_air_date).getFullYear()}
+              </h4>
+            </div>
           </Link>
         ))}
       </div>

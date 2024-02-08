@@ -28,9 +28,9 @@ const MovieDetails = () => {
           src={`https://image.tmdb.org/t/p/w342${data.poster_path}`}
           alt={data.original_title}
         />
-        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
           {data.original_title}
-        </h2>
+        </h1>
 
         <blockquote className="mt-6 border-l-2 pl-6 italic">
           {data.tagline}
