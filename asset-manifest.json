@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/goit-react-hw-05-movies/static/css/main.a2b34304.css",
+    "main.css": "/goit-react-hw-05-movies/static/css/main.e4b890b0.css",
     "main.js": "/goit-react-hw-05-movies/static/js/main.fb92af21.js",
     "static/js/53.b591dafb.chunk.js": "/goit-react-hw-05-movies/static/js/53.b591dafb.chunk.js",
     "static/js/370.196e474d.chunk.js": "/goit-react-hw-05-movies/static/js/370.196e474d.chunk.js",
@@ -9,8 +9,10 @@
     "static/js/590.2a5c97e6.chunk.js": "/goit-react-hw-05-movies/static/js/590.2a5c97e6.chunk.js",
     "static/js/128.43068c9a.chunk.js": "/goit-react-hw-05-movies/static/js/128.43068c9a.chunk.js",
     "static/js/486.129f82df.chunk.js": "/goit-react-hw-05-movies/static/js/486.129f82df.chunk.js",
+    "static/media/GeistVariableVF.woff2": "/goit-react-hw-05-movies/static/media/GeistVariableVF.9ea1140bf2838309ca47.woff2",
+    "static/media/GeistMonoVariableVF.woff2": "/goit-react-hw-05-movies/static/media/GeistMonoVariableVF.6405987f6394ae5b6c56.woff2",
     "index.html": "/goit-react-hw-05-movies/index.html",
-    "main.a2b34304.css.map": "/goit-react-hw-05-movies/static/css/main.a2b34304.css.map",
+    "main.e4b890b0.css.map": "/goit-react-hw-05-movies/static/css/main.e4b890b0.css.map",
     "main.fb92af21.js.map": "/goit-react-hw-05-movies/static/js/main.fb92af21.js.map",
     "53.b591dafb.chunk.js.map": "/goit-react-hw-05-movies/static/js/53.b591dafb.chunk.js.map",
     "370.196e474d.chunk.js.map": "/goit-react-hw-05-movies/static/js/370.196e474d.chunk.js.map",
@@ -21,7 +23,7 @@
     "486.129f82df.chunk.js.map": "/goit-react-hw-05-movies/static/js/486.129f82df.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a2b34304.css",
+    "static/css/main.e4b890b0.css",
     "static/js/main.fb92af21.js"
   ]
 }
