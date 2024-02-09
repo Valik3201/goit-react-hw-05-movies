@@ -41,14 +41,16 @@ const Home = () => {
                 </Badge>
               </div>
 
-              <h3 className="scroll-m-20 text-md font-bold tracking-tight">
-                {movie.title || movie.name}
-              </h3>
-              <h4 className="text-md text-muted-foreground font-semibold">
-                {movie.release_date
-                  ? new Date(movie.release_date).getFullYear()
-                  : new Date(movie.first_air_date).getFullYear()}
-              </h4>
+              <div className="flex flex-col gap-x-0.5">
+                <h3 className="scroll-m-20 text-lg font-bold tracking-tight">
+                  {movie.title || movie.name}
+                </h3>
+                <h4 className="text-md text-muted-foreground font-bold">
+                  {movie.release_date
+                    ? new Date(movie.release_date).getFullYear()
+                    : new Date(movie.first_air_date).getFullYear()}
+                </h4>
+              </div>
             </div>
           </Link>
         ))}

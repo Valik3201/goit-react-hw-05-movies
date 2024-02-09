@@ -6,6 +6,8 @@ import { searchMovies } from 'services/searchMovies';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
+import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
+
 const Movies = () => {
   const searchInputRef = useRef(null);
   const yearInputRef = useRef(null);
@@ -60,7 +62,7 @@ const Movies = () => {
         Search Movies
       </h1>
       <form onSubmit={handleSearch}>
-        <div className="flex w-full max-w-2xl items-center space-x-2 pb-8">
+        <div className="flex flex-col sm:flex-row w-full max-w-2xl items-start gap-2 pb-8">
           <Input
             type="text"
             ref={searchInputRef}
@@ -71,7 +73,10 @@ const Movies = () => {
             ref={yearInputRef}
             placeholder="Enter release year..."
           />
-          <Button type="submit">Search</Button>
+          <Button type="submit">
+            <MagnifyingGlassIcon className="mr-2 h-4 w-4" />
+            Search
+          </Button>
         </div>
       </form>
       {isLoading && <div>Loading...</div>}

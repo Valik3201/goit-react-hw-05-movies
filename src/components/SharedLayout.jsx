@@ -9,6 +9,8 @@ import {
 
 import { buttonVariants } from '@/components/ui/button';
 
+import { HomeIcon, VideoIcon } from '@radix-ui/react-icons';
+
 export const SharedLayout = () => {
   return (
     <div className="container md:mx-auto pb-8">
@@ -25,6 +27,7 @@ export const SharedLayout = () => {
                       : buttonVariants({ variant: 'outline' })
                   }
                 >
+                  <HomeIcon className="mr-2 h-4 w-4" />
                   Home
                 </NavLink>
               </NavigationMenuItem>
@@ -37,6 +40,7 @@ export const SharedLayout = () => {
                       : buttonVariants({ variant: 'outline' })
                   }
                 >
+                  <VideoIcon className="mr-2 h-4 w-4" />
                   Movies
                 </NavLink>
               </NavigationMenuItem>
