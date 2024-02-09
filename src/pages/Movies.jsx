@@ -1,7 +1,9 @@
 import { useRef, useEffect } from 'react';
-import { useSearchParams, Link } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { searchMovies } from 'services/searchMovies';
+
+import MovieItem from 'components/MovieItem';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -83,25 +85,7 @@ const Movies = () => {
       {isError && <div>Error fetching data: {error.message}</div>}
       <div className='className="grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4'>
         {data?.map(movie => (
-          <Link to={`/movies/${movie.id}`} key={movie.id}>
-            <div className="flex flex-col gap-2">
-              <div className="overflow-hidden rounded-lg">
-                <img
-                  src={`https://image.tmdb.org/t/p/w342${movie.poster_path}`}
-                  alt={movie.title || movie.name}
-                  className="h-auto w-auto object-cover transition-all hover:scale-105"
-                />
-              </div>
-              <h3 className="scroll-m-20 text-md font-bold tracking-tight">
-                {movie.title || movie.name}
-              </h3>
-              <h4 lassName="text-md text-muted-foreground font-semibold">
-                {movie.release_date
-                  ? new Date(movie.release_date).getFullYear()
-                  : new Date(movie.first_air_date).getFullYear()}
-              </h4>
-            </div>
-          </Link>
+          <MovieItem movie={movie} key={movie.id} />
         ))}
       </div>
     </div>
