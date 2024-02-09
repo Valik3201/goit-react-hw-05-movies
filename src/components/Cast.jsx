@@ -20,17 +20,21 @@ const Cast = () => {
   }
 
   return (
-    <div>
-      <h1>Cast</h1>
+    <div className="grid grid-cols-10 gap-4 py-4 text-xs">
       {data.map(actor => (
         <ul key={actor.id}>
           <li>
             <img
-              src={`https://image.tmdb.org/t/p/w92${actor.profile_path}`}
+              src={
+                actor.profile_path
+                  ? `https://image.tmdb.org/t/p/w185${actor.profile_path}`
+                  : `https://placehold.co/185x278?text=${actor.name}`
+              }
               alt={actor.name}
+              className="rounded-lg mb-2"
             />
-            <h4>{actor.name}</h4>
-            <h5>{actor.character}</h5>
+            <p className="font-bold">{actor.name}</p>
+            <p className="text-muted-foreground">{actor.character}</p>
           </li>
         </ul>
       ))}
