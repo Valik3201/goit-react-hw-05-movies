@@ -3,6 +3,8 @@ import { useQuery } from '@tanstack/react-query';
 
 import { fetchCast } from 'services/fetchCast';
 
+import { Loader } from './Loader';
+
 const Cast = () => {
   const { movieId } = useParams();
 
@@ -12,7 +14,7 @@ const Cast = () => {
   });
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   if (error) {

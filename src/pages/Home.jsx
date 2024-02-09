@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchTrendingData } from 'services/fetchTrendingData';
 
 import MovieItem from 'components/MovieItem';
+import { Loader } from 'components/Loader';
 
 const Home = () => {
   const { isPending, isError, data, error } = useQuery({
@@ -10,7 +11,7 @@ const Home = () => {
   });
 
   if (isPending) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   if (isError) {

@@ -7,6 +7,7 @@ import MovieItem from 'components/MovieItem';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Loader } from 'components/Loader';
 
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 
@@ -81,7 +82,7 @@ const Movies = () => {
           </Button>
         </div>
       </form>
-      {isLoading && <div>Loading...</div>}
+      {isLoading && <Loader />}
       {isError && <div>Error fetching data: {error.message}</div>}
       <div className='className="grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4'>
         {data?.map(movie => (

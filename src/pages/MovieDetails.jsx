@@ -8,6 +8,7 @@ import { format } from 'date-fns';
 import { fetchMovieDetails } from 'services/fetchMovieDetails';
 
 import { Badge } from '@/components/ui/badge';
+import { Loader } from 'components/Loader';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
@@ -18,7 +19,7 @@ const MovieDetails = () => {
   });
 
   if (isPending) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   if (isError) {
