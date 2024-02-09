@@ -3,9 +3,19 @@ import { useQuery } from '@tanstack/react-query';
 
 import { fetchReviews } from 'services/fetchReviews';
 
+import { Loader } from './Loader';
+
 import { format } from 'date-fns';
 import ReactMarkdown from 'react-markdown';
 import parse from 'html-react-parser';
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 
 const Reviews = () => {
   const { movieId } = useParams();
@@ -16,7 +26,7 @@ const Reviews = () => {
   });
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   if (error) {
@@ -24,24 +34,27 @@ const Reviews = () => {
   }
 
   return (
-    <div>
-      <h1>Reviews</h1>
+    <div className="flex flex-col w-full max-w-5xl items-start gap-4 py-8">
       {data.map(review => (
         <ul key={review.id}>
           <li>
-            <h4>{review.author}</h4>
-
-            <p>{format(new Date(review.created_at), 'MMMM d, yyyy H:mm')}</p>
-
-            {/<([A-Za-z][A-Za-z0-9]*)\b[^>]*>(.*?)<\/\1>/.test(
-              review.content
-            ) ? (
-              <div>{parse(review.content)}</div>
-            ) : (
-              <div>
-                <ReactMarkdown>{review.content}</ReactMarkdown>
-              </div>
-            )}
+            <Card>
+              <CardHeader>
+                <CardTitle>{review.author}</CardTitle>
+                <CardDescription>
+                  {format(new Date(review.created_at), 'HH:mm, MMMM d, yyyy')}
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                {/<([A-Za-z][A-Za-z0-9]*)\b[^>]*>(.*?)<\/\1>/.test(
+                  review.content
+                ) ? (
+                  <p>{parse(review.content)}</p>
+                ) : (
+                  <ReactMarkdown>{review.content}</ReactMarkdown>
+                )}
+              </CardContent>
+            </Card>
           </li>
         </ul>
       ))}
