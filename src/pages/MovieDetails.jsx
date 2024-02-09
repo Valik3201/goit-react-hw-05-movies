@@ -1,9 +1,13 @@
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { Suspense } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
+
+import { format } from 'date-fns';
 
 import { fetchMovieDetails } from 'services/fetchMovieDetails';
+
+import { Badge } from '@/components/ui/badge';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
@@ -23,58 +27,97 @@ const MovieDetails = () => {
 
   return (
     <div>
-      <div>
+      <div className="grid md:grid-cols-3 gap-8 max-w-6xl">
         <img
-          src={`https://image.tmdb.org/t/p/w342${data.poster_path}`}
-          alt={data.original_title}
+          width={500}
+          src={
+            data.poster_path
+              ? `https://image.tmdb.org/t/p/original${data.poster_path}`
+              : `https://placehold.co/342x513?text=${data.title}`
+          }
+          alt={data.title}
+          className="rounded-lg"
         />
-        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
-          {data.original_title}
-        </h1>
+        <div className="col-span-2 flex flex-col gap-4">
+          <div>
+            <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+              {data.title}
+            </h1>
 
-        <blockquote className="mt-6 border-l-2 pl-6 italic">
-          {data.tagline}
-        </blockquote>
+            {data.original_language !== 'en' && (
+              <h2 className="scroll-m-20 pt-2 text-3xl text-muted-foreground font-semibold tracking-tight first:mt-0">
+                {data.original_title}
+              </h2>
+            )}
+          </div>
 
-        <p className="leading-7 [&:not(:first-child)]:mt-6">{data.overview}</p>
+          <p className="text-md font-semibold">
+            Realese date:{' '}
+            <span className="text-muted-foreground">
+              {format(new Date(data.release_date), 'MMMM d, yyyy')}
+            </span>
+          </p>
 
-        <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
-          Genres
-        </h4>
-        {data.genres.map(genre => (
-          <ul key={genre.id} className="my-6 ml-6 list-disc [&>li]:mt-2">
-            <li>{genre.name}</li>
-          </ul>
-        ))}
+          {data.tagline && (
+            <blockquote className="border-l-2 pl-6 italic">
+              {data.tagline}
+            </blockquote>
+          )}
 
-        <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
-          Production Companies
-        </h4>
-        {data.production_countries.map(country => (
-          <ul
-            key={country.iso_3166_1}
-            className="my-6 ml-6 list-disc [&>li]:mt-2"
-          >
-            <li>{country.name}</li>
-          </ul>
-        ))}
+          <p className="leading-7">{data.overview}</p>
+
+          <div className="flex flex-row gap-2">
+            <p className="scroll-m-20 text-md font-semibold tracking-tight">
+              Genres:
+            </p>
+            {data.genres.map(genre => (
+              <ul key={genre.id}>
+                <li>
+                  <Badge>{genre.name}</Badge>
+                </li>
+              </ul>
+            ))}
+          </div>
+
+          <div className="flex flex-row gap-2">
+            <p className="scroll-m-20 text-md font-semibold tracking-tight">
+              Production Companies:
+            </p>
+            {data.production_countries.map(country => (
+              <ul key={country.iso_3166_1}>
+                <li>
+                  <Badge>{country.name}</Badge>
+                </li>
+              </ul>
+            ))}
+          </div>
+        </div>
       </div>
-      <ul>
+
+      <ul className="flex flex-row gap-4 border-b pt-4 pb-2">
         <li>
-          <Link
+          <NavLink
             to="cast"
-            className="scroll-m-20 text-2xl font-semibold tracking-tight"
+            className={({ isActive }) =>
+              isActive
+                ? 'scroll-m-20 text-2xl font-semibold tracking-tight'
+                : 'scroll-m-20 text-2xl font-semibold tracking-tight text-muted-foreground transition hover:text-inherit'
+            }
           >
             Cast
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link
+          <NavLink
             to="reviews"
-            className="scroll-m-20 text-2xl font-semibold tracking-tight"
+            className={({ isActive }) =>
+              isActive
+                ? 'scroll-m-20 text-2xl font-semibold tracking-tight'
+                : 'scroll-m-20 text-2xl font-semibold tracking-tight text-muted-foreground transition hover:text-inherit'
+            }
           >
             Reviews
-          </Link>
+          </NavLink>
         </li>
       </ul>
       <Suspense fallback={<div>Loading subpage...</div>}>
