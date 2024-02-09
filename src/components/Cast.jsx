@@ -20,7 +20,7 @@ const Cast = () => {
   }
 
   return (
-    <div className="grid grid-cols-10 gap-4 py-4 text-xs">
+    <div className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 gap-4 py-4 text-xs">
       {data.map(actor => (
         <ul key={actor.id}>
           <li>
