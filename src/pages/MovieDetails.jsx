@@ -26,6 +26,8 @@ const MovieDetails = () => {
     return <div>Error fetching data: {error.message}</div>;
   }
 
+  console.debug(data);
+
   return (
     <div>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-8 max-w-6xl">
@@ -81,7 +83,7 @@ const MovieDetails = () => {
 
           <div className="flex flex-col md:flex-row gap-2">
             <p className="scroll-m-20 text-md font-semibold tracking-tight">
-              Production Companies:
+              Production Countries:
             </p>
             {data.production_countries.map(country => (
               <ul key={country.iso_3166_1}>
