@@ -1,8 +1,7 @@
-import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { fetchTrendingData } from 'services/fetchTrendingData';
 
-import { Badge } from '@/components/ui/badge';
+import MovieItem from 'components/MovieItem';
 
 const Home = () => {
   const { isPending, isError, data, error } = useQuery({
@@ -25,34 +24,7 @@ const Home = () => {
       </h1>
       <div className="grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
         {data.map(movie => (
-          <Link to={`/movies/${movie.id}`} key={movie.id}>
-            <div className="flex flex-col gap-2">
-              <div className="overflow-hidden rounded-lg">
-                <img
-                  src={`https://image.tmdb.org/t/p/w342${movie.poster_path}`}
-                  alt={movie.title || movie.name}
-                  className="h-auto w-auto object-cover transition-all hover:scale-105"
-                />
-              </div>
-              <div className="flex-none">
-                <Badge>
-                  {movie.media_type.charAt(0).toUpperCase() +
-                    movie.media_type.slice(1)}
-                </Badge>
-              </div>
-
-              <div className="flex flex-col gap-x-0.5">
-                <h3 className="scroll-m-20 text-lg font-bold tracking-tight">
-                  {movie.title || movie.name}
-                </h3>
-                <h4 className="text-md text-muted-foreground font-bold">
-                  {movie.release_date
-                    ? new Date(movie.release_date).getFullYear()
-                    : new Date(movie.first_air_date).getFullYear()}
-                </h4>
-              </div>
-            </div>
-          </Link>
+          <MovieItem movie={movie} key={movie.id} />
         ))}
       </div>
     </div>
