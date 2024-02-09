@@ -27,16 +27,15 @@ const MovieDetails = () => {
 
   return (
     <div>
-      <div className="grid md:grid-cols-3 gap-8 max-w-6xl">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-8 max-w-6xl">
         <img
-          width={500}
           src={
             data.poster_path
               ? `https://image.tmdb.org/t/p/original${data.poster_path}`
               : `https://placehold.co/342x513?text=${data.title}`
           }
           alt={data.title}
-          className="rounded-lg"
+          className="w-full rounded-lg"
         />
         <div className="col-span-2 flex flex-col gap-4">
           <div>
@@ -66,7 +65,7 @@ const MovieDetails = () => {
 
           <p className="leading-7">{data.overview}</p>
 
-          <div className="flex flex-row gap-2">
+          <div className="flex flex-col md:flex-row gap-2">
             <p className="scroll-m-20 text-md font-semibold tracking-tight">
               Genres:
             </p>
@@ -79,7 +78,7 @@ const MovieDetails = () => {
             ))}
           </div>
 
-          <div className="flex flex-row gap-2">
+          <div className="flex flex-col md:flex-row gap-2">
             <p className="scroll-m-20 text-md font-semibold tracking-tight">
               Production Companies:
             </p>
