@@ -3,6 +3,7 @@ import { fetchTrendingData } from 'services/fetchTrendingData';
 
 import MovieItem from 'components/MovieItem';
 import { Loader } from 'components/Loader';
+import { AlertDestructive } from 'components/Alert';
 
 const Home = () => {
   const { isPending, isError, data, error } = useQuery({
@@ -15,7 +16,7 @@ const Home = () => {
   }
 
   if (isError) {
-    return <div>Error fetching data: {error.message}</div>;
+    return <AlertDestructive message={error.message} />;
   }
 
   return (

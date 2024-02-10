@@ -7,7 +7,9 @@ import MovieItem from 'components/MovieItem';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+
 import { Loader } from 'components/Loader';
+import { AlertDestructive, AlertInfo } from 'components/Alert';
 
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 
@@ -69,12 +71,12 @@ const Movies = () => {
           <Input
             type="text"
             ref={searchInputRef}
-            placeholder="Enter movie title..."
+            placeholder="Enter movie title"
           />
           <Input
             type="text"
             ref={yearInputRef}
-            placeholder="Enter release year..."
+            placeholder="Enter release year"
           />
           <Button type="submit">
             <MagnifyingGlassIcon className="mr-2 h-4 w-4" />
@@ -83,12 +85,15 @@ const Movies = () => {
         </div>
       </form>
       {isLoading && <Loader />}
-      {isError && <div>Error fetching data: {error.message}</div>}
-      <div className='className="grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4'>
-        {data?.map(movie => (
-          <MovieItem movie={movie} key={movie.id} />
-        ))}
-      </div>
+      {isError && <AlertDestructive message={error.message} />}
+      {searchParams.has('query') && data?.length === 0 && <AlertInfo />}
+      {data && !isLoading && (
+        <div className='className="grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4'>
+          {data?.map(movie => (
+            <MovieItem movie={movie} key={movie.id} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

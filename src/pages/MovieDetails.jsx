@@ -1,14 +1,15 @@
-import { useParams } from 'react-router-dom';
+import { NavLink, Outlet, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { Suspense } from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
 
 import { format } from 'date-fns';
 
 import { fetchMovieDetails } from 'services/fetchMovieDetails';
 
 import { Badge } from '@/components/ui/badge';
+
 import { Loader } from 'components/Loader';
+import { AlertDestructive } from 'components/Alert';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
@@ -23,10 +24,8 @@ const MovieDetails = () => {
   }
 
   if (isError) {
-    return <div>Error fetching data: {error.message}</div>;
+    return <AlertDestructive message={error.message} />;
   }
-
-  console.debug(data);
 
   return (
     <div>
