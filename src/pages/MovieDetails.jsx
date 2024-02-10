@@ -121,7 +121,7 @@ const MovieDetails = () => {
           </NavLink>
         </li>
       </ul>
-      <Suspense fallback={<div>Loading subpage...</div>}>
+      <Suspense fallback={<Loader />}>
         <Outlet />
       </Suspense>
     </div>
