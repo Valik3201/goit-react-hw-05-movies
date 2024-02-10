@@ -132,12 +132,6 @@ In this project, the following components from the `shadcn/ui` library are utili
 
 Tailwind CSS is used for utility-based styling throughout the project. This includes defining styles for layout, typography, colors, and more by applying utility classes directly to HTML elements.
 
-To watch for changes and rebuild the CSS when necessary, the following command can be run:
-
-```bash
-npx tailwindcss -i ./src/input.css -o ./src/output.css --watch
-```
-
 By combining `shadcn/ui` for UI components and Tailwind CSS for utility-based styling, this project benefits from a streamlined development process, allowing for faster iteration and consistent design patterns throughout the application.
 
 ## Typography
