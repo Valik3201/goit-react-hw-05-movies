@@ -10,6 +10,7 @@ import {
 import { buttonVariants } from '@/components/ui/button';
 
 import { HomeIcon, VideoIcon } from '@radix-ui/react-icons';
+import { Loader } from './Loader';
 
 export const SharedLayout = () => {
   return (
@@ -48,7 +49,7 @@ export const SharedLayout = () => {
           </NavigationMenu>
         </nav>
       </header>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Loader />}>
         <Outlet />
       </Suspense>
     </div>
