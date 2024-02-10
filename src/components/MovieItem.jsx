@@ -10,7 +10,7 @@ const MovieItem = ({ movie }) => {
           <img
             src={
               movie.poster_path
-                ? `https://image.tmdb.org/t/p/w342${movie.poster_path}`
+                ? `https://image.tmdb.org/t/p/original${movie.poster_path}`
                 : `https://placehold.co/342x513?text=${
                     movie.title || movie.name
                   }`
@@ -32,7 +32,7 @@ const MovieItem = ({ movie }) => {
           <h3 className="scroll-m-20 text-lg font-bold tracking-tight">
             {movie.title || movie.name}
           </h3>
-          <h4 className="text-md text-muted-foreground font-bold">
+          <h4 className="text-sm text-muted-foreground font-bold">
             {movie.release_date && new Date(movie.release_date).getFullYear()}
             {movie.first_air_date &&
               new Date(movie.first_air_date).getFullYear()}
