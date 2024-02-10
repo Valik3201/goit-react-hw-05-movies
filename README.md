@@ -168,8 +168,5 @@ This package offers a convenient alternative for developers who prefer the flexi
 
 ## Screenshots
 
-<p float="left">
-  <img src="/assets/Movie-Search-2.jpeg" height="730" />
-  <img src="/assets/Movie-Search-3.jpeg" height="730" /> 
-</p>
+[![screenshot](https://github.com/Valik3201/goit-react-hw-05-movies/blob/main/assets/Movie-Search-2.jpeg)](https://github.com/Valik3201/goit-react-hw-05-movies/blob/main/assets/Movie-Search-2.jpeg) [![screenshot](https://github.com/Valik3201/goit-react-hw-05-movies/blob/main/assets/Movie-Search-3.jpeg)](https://github.com/Valik3201/goit-react-hw-05-movies/blob/main/assets/Movie-Search-3.jpeg)
 
