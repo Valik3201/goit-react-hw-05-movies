@@ -68,7 +68,7 @@ const MovieDetails = () => {
 
           <p className="leading-7">{data.overview}</p>
 
-          <div className="flex flex-col md:flex-row gap-2">
+          <div className="flex flex-row flex-wrap gap-2">
             <p className="scroll-m-20 text-md font-semibold tracking-tight">
               Genres:
             </p>
@@ -81,7 +81,7 @@ const MovieDetails = () => {
             ))}
           </div>
 
-          <div className="flex flex-col md:flex-row gap-2">
+          <div className="flex flex-row flex-wrap gap-2">
             <p className="scroll-m-20 text-md font-semibold tracking-tight">
               Production Countries:
             </p>
