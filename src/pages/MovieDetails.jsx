@@ -11,6 +11,10 @@ import { Badge } from '@/components/ui/badge';
 import { Loader } from 'components/Loader';
 import { AlertDestructive } from 'components/Alert';
 
+/**
+ * Component displaying details of a specific movie.
+ * @returns {JSX.Element} JSX element representing the MovieDetails component.
+ */
 const MovieDetails = () => {
   const { movieId } = useParams();
 

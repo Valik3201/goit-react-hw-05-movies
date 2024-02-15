@@ -13,6 +13,10 @@ import { AlertDestructive, AlertInfo } from 'components/Alert';
 
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 
+/**
+ * Component for searching movies.
+ * @returns {JSX.Element} JSX element representing the Movies component.
+ */
 const Movies = () => {
   const searchInputRef = useRef(null);
   const yearInputRef = useRef(null);

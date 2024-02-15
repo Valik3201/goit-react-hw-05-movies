@@ -12,6 +12,10 @@ import { buttonVariants } from '@/components/ui/button';
 import { HomeIcon, VideoIcon } from '@radix-ui/react-icons';
 import { Loader } from './Loader';
 
+/**
+ * Shared layout component for consistent layout across pages.
+ * @returns {JSX.Element} JSX element representing the SharedLayout component.
+ */
 export const SharedLayout = () => {
   return (
     <div className="container md:mx-auto pb-8">

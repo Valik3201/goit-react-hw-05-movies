@@ -18,6 +18,10 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 
+/**
+ * Component for displaying reviews of a movie.
+ * @returns {JSX.Element} JSX element representing the Reviews component.
+ */
 const Reviews = () => {
   const { movieId } = useParams();
 

@@ -17,6 +17,10 @@ const MovieDetails = lazy(() => import('pages/MovieDetails'));
 const Cast = lazy(() => import('components/Cast'));
 const Reviews = lazy(() => import('components/Reviews'));
 
+/**
+ * Root component of the application.
+ * @returns {JSX.Element} JSX element representing the App component.
+ */
 export const App = () => {
   return (
     <QueryClientProvider client={queryClient}>

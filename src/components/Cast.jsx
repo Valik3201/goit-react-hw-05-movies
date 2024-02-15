@@ -6,6 +6,10 @@ import { fetchCast } from 'services/fetchCast';
 import { Loader } from './Loader';
 import { AlertDestructive, AlertNoCast } from './Alert';
 
+/**
+ * Component for displaying cast information of a movie.
+ * @returns {JSX.Element} JSX element representing the Cast component.
+ */
 const Cast = () => {
   const { movieId } = useParams();
 
@@ -28,7 +32,7 @@ const Cast = () => {
       <div className="grid grid-cols-4 sm:grid-cols-6 gap-4 max-w-5xl py-4 text-xs">
         <ul key={actor.id}>
           {data.map(actor => (
-            <li>
+            <li key={actor.id}>
               <img
                 src={
                   actor.profile_path

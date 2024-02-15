@@ -2,6 +2,11 @@ import { Link } from 'react-router-dom';
 
 import { Badge } from '@/components/ui/badge';
 
+/**
+ * Component for displaying a movie item.
+ * @param {Object} movie - The movie object containing information about the movie.
+ * @returns {JSX.Element} JSX element representing the MovieItem component.
+ */
 const MovieItem = ({ movie }) => {
   return (
     <Link to={`/movies/${movie.id}`} key={movie.id}>

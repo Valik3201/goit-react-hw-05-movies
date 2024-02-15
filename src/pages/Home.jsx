@@ -5,6 +5,10 @@ import MovieItem from 'components/MovieItem';
 import { Loader } from 'components/Loader';
 import { AlertDestructive } from 'components/Alert';
 
+/**
+ * Home component displaying trending movies and TV shows.
+ * @returns {JSX.Element} JSX element representing the Home component.
+ */
 const Home = () => {
   const { isPending, isError, data, error } = useQuery({
     queryKey: ['tranding'],
