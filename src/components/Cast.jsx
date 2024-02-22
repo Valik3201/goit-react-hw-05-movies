@@ -30,7 +30,7 @@ const Cast = () => {
     <>
       {!isLoading && data.length === 0 && <AlertNoCast />}
       <div className="grid grid-cols-4 sm:grid-cols-6 gap-4 max-w-5xl py-4 text-xs">
-        <ul key={actor.id}>
+        <ul>
           {data.map(actor => (
             <li key={actor.id}>
               <img
